@@ -9,10 +9,12 @@
 </head>
 <body>
     <h1>URL Shortener</h1>
-
-    <% if (locals.error) { %>
-    <p class="error"><%= error %></p>
-    <% } %> 
+    <h2>Paste the URL to get shorted</h2>
+    <div class="error-space">
+        <% if (locals.error) { %>
+            <p class="error"><%= error %></p>
+        <% } %> 
+    </div>
 
     <form action="/" method="post">
         <input type="url" name="url" id="url"  placeholder="url here..."/> 
