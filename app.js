@@ -30,13 +30,13 @@ app.post('/', async (req, res, next) => {
         }
         const urlExist = await ShortUrl.findOne({ url })
         if (urlExist) {
-            res.render('index', {short_url: `${req.headers.host}/${urlExist.shortId}` }) // if url  putted exist and already gets shorted
+            res.render('index', {short_url: `${req.protocol}://${req.headers.host}/${urlExist.shortId}` }) // if url  putted exist and already gets shorted
                                //short_url: `${req.hostname}/${urlExist.shortId}`   //to deploy in a domain
                 return
         }
         const shortUrl = new ShortUrl({url: url, shortId: shortId.generate() }) 
         const result = await shortUrl.save()
-        res.render('index', {short_url: `${req.headers.host}/${result.shortId}` }) // if url putted exist but it doesn't get shorted: save it and get short url
+        res.render('index', {short_url: `${req.protocol}://${req.headers.host}/${result.shortId}` }) // if url putted exist but it doesn't get shorted: save it and get short url
                            //short_url: `${req.hostname}/${result.shortId}` //to deploy in a domain
     } catch (error) {
         next(error)
